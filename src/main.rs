@@ -2,10 +2,11 @@ extern crate rand;
 use std::io;
 use rand::Rng;
 use std::cmp::Ordering;
+//use std::string;
 
 
 fn main() {
-	let reiniciar = true;
+	let mut reiniciar = true;
 	while reiniciar {
     	let aleatorio = rand::thread_rng().gen_range(1,1001);
 		println!("El numero a adivinar es: {}", aleatorio);
@@ -27,18 +28,32 @@ fn main() {
 				Ordering::Equal => println!("Adivinaste!!"),
 			}//fin match
 			if aleatorio == line {
-				println!("Presione cualquier tecla para reiniciar, (n) para salir?");
-				let mut play_again = String::new();
-				io::stdin().read_line(&mut play_again)
-				.ok()
-				.expect("No se pudo leer la linea"); // Read continuous
 				continuar = false;
-				/*
-					if assert_eq!(play_again, "n" ) {
-					reiniciar = false;
-				}//fin del if
-				*/
 			}//fin del if
 	    }//fin while continuar
+	    if contador < 10 {
+			println!("Ya sabia ud el secreto, o tuvo suerte!");
+		}else if contador == 10 {
+			println!("Aja!, sabia ud el secreto");
+		}else {
+			println!("Deberia haberlo hecho mejor!");
+		}// fin if else
+		let mut pregunta = true;
+		while pregunta {
+			println!("Desea volver a jugar? (s/n)");
+			let mut play_again = String::new();
+			io::stdin().read_line(&mut play_again)
+			.ok()
+			.expect("No se pudo leer la linea"); // Read continuous
+			if play_again.starts_with("s").to_string() == "true" || play_again.starts_with("S").to_string() == "true"{
+				reiniciar = true;
+				pregunta = false;
+			}else if play_again.starts_with("n").to_string() == "true" || play_again.starts_with("N").to_string() == "true" {
+					reiniciar = false;
+					pregunta = false;
+			}else {
+				println!("Elija una opcion");
+			}	
+		}
     }//fin while reiniciar
 }//fin main
