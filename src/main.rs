@@ -38,7 +38,7 @@ fn main() {
 		}// fin if else
 		let mut pregunta = true;
 		while pregunta {
-			println!("Desea volver a jugar? (s/n)");
+			println!("Desea volver a jugar? (s/n)"); //Pregunta si desea continuar
 			let mut play_again = String::new(); //se declara una variable inmutable de tipo string
 			io::stdin().read_line(&mut play_again)
 			.ok()
